@@ -2,6 +2,7 @@ import React, { useState, createContext, useEffect, useMemo, useContext } from "
 import { useAuth } from "./AuthContext";
 import { useTenant } from "../hooks/useTenant";
 import { REACT_APP_SETTINGS_API } from "../../env";
+import { combineUrlAndPath } from "../utils/combineUrlAndPath";
 
 export const SettingsContext = createContext();
 
@@ -20,7 +21,7 @@ export const SettingsProvider = ({ children }) => {
 
   useEffect(() => {
     if (user?.id) {
-      fetch(`${process?.env?.REACT_APP_SETTINGS_API}/mysettings/${user.id}`,
+      fetch(combineUrlAndPath(REACT_APP_SETTINGS_API,`mysettings/${user.id}`),
         {
           method: "GET",
           headers: { "Content-Type": "application/json", APP_ID: tenant },
