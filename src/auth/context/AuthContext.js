@@ -12,6 +12,7 @@ import { useTenant } from '../hooks/useTenant';
 import useDeviceInfo from '../hooks/useDeviceInfo';
 import { combineUrlAndPath } from '../utils/combineUrlAndPath';
 import useEventing from '../hooks/useEventing';
+import { REACT_APP_AUTH_API } from "../../env";
 
 const AuthenticationContext = createContext(null);
 
@@ -51,7 +52,7 @@ const AuthenticationProvider = (props) => {
     const body = { token: token };
     fetch(
       combineUrlAndPath(
-        process.env.REACT_APP_AUTH_API,
+        REACT_APP_AUTH_API,
         "validateToken.php?debug=true"
       ),
       {
@@ -126,7 +127,7 @@ const AuthenticationProvider = (props) => {
         avatar: decodedToken2.picture,
       };
       await fetch(
-        combineUrlAndPath(process.env.REACT_APP_AUTH_API, `logingoogle.php`),
+        combineUrlAndPath(REACT_APP_AUTH_API, `logingoogle.php`),
         {
           body: JSON.stringify(body),
           headers: {
@@ -187,7 +188,7 @@ const AuthenticationProvider = (props) => {
     };
     return fetch(
       combineUrlAndPath(
-        process.env.REACT_APP_AUTH_API,
+        REACT_APP_AUTH_API,
         `registration.php?debug=true`
       ),
       {
@@ -232,7 +233,7 @@ const AuthenticationProvider = (props) => {
     };
 
     return fetch(
-      combineUrlAndPath(process.env.REACT_APP_AUTH_API, `login.php?debug=true`),
+      combineUrlAndPath(REACT_APP_AUTH_API, `login.php?debug=true`),
       {
         body: JSON.stringify(body),
         headers: {
@@ -276,7 +277,7 @@ const AuthenticationProvider = (props) => {
     const body = {
       code: email,
     };
-    return fetch(combineUrlAndPath(process.env.REACT_APP_AUTH_API, `magic.php`), {
+    return fetch(combineUrlAndPath(REACT_APP_AUTH_API, `magic.php`), {
       body: JSON.stringify(body),
       headers: {
         "Content-Type": "application/json",
@@ -306,7 +307,7 @@ const AuthenticationProvider = (props) => {
 
     return fetch(
       combineUrlAndPath(
-        process.env.REACT_APP_AUTH_API,
+        REACT_APP_AUTH_API,
         `loginwithmagiclink.php?debug=true`
       ),
       {
@@ -350,7 +351,7 @@ const AuthenticationProvider = (props) => {
     };
     return fetch(
       combineUrlAndPath(
-        process.env.REACT_APP_AUTH_API,
+        REACT_APP_AUTH_API,
         `forgotpassword.php?debug=true`
       ),
       {
@@ -386,7 +387,7 @@ const AuthenticationProvider = (props) => {
     };
     return fetch(
       combineUrlAndPath(
-        process.env.REACT_APP_AUTH_API,
+        REACT_APP_AUTH_API,
         `changepassword.php?debug=true`
       ),
       {
@@ -408,7 +409,7 @@ const AuthenticationProvider = (props) => {
   const impersonate = (id) => {
     fetch(
       combineUrlAndPath(
-        process.env.REACT_APP_AUTH_API,
+        REACT_APP_AUTH_API,
         `/impersonate.php?debug=true&id=${id}`
       ),
       {
@@ -460,7 +461,7 @@ const AuthenticationProvider = (props) => {
     }
     await fetch(
       combineUrlAndPath(
-        process.env.REACT_APP_AUTH_API,
+        REACT_APP_AUTH_API,
         `/api.php/user/${user.id}/properties`
       ),
       {
@@ -493,8 +494,8 @@ const AuthenticationProvider = (props) => {
 
     const savePromises = properties.map((property) => {
       const url = property.id
-        ? `${process.env.REACT_APP_AUTH_API}/api.php/property/${property.id}`
-        : `${process.env.REACT_APP_AUTH_API}/api.php/property/`;
+        ? `${REACT_APP_AUTH_API}/api.php/property/${property.id}`
+        : `${REACT_APP_AUTH_API}/api.php/property/`;
 
       const method = property.id ? "PUT" : "POST";
 
@@ -522,7 +523,7 @@ const AuthenticationProvider = (props) => {
   const saveUser = (newUser) => {
     fetch(
       combineUrlAndPath(
-        process.env.REACT_APP_AUTH_API,
+        REACT_APP_AUTH_API,
         `api.php/user/${user.id}`
       ),
       {
@@ -553,7 +554,7 @@ const AuthenticationProvider = (props) => {
   const oldIdToNewMapping = async (oldId) => {
     const resp = await fetch(
       combineUrlAndPath(
-        process.env.REACT_APP_AUTH_API,
+        REACT_APP_AUTH_API,
         `api.php/user/${oldId}/old`
       ),
       {
@@ -604,7 +605,7 @@ const AuthenticationProvider = (props) => {
     ]
   );
 
-  if (!process.env.REACT_APP_AUTH_API) {
+  if (!REACT_APP_AUTH_API) {
     return (
       <div>
         <h1>Missing Configuration</h1>

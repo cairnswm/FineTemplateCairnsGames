@@ -1,6 +1,7 @@
 import React, { useState, createContext, useEffect, useMemo, useContext } from "react";
 import { useAuth } from "./AuthContext";
 import { useTenant } from "../hooks/useTenant";
+import { REACT_APP_SETTINGS_API } from "../../env";
 
 export const SettingsContext = createContext();
 
@@ -42,7 +43,7 @@ export const SettingsProvider = ({ children }) => {
     [settings]
   );
 
-  if (!process.env.REACT_APP_SETTINGS_API) {
+  if (!REACT_APP_SETTINGS_API) {
     return (
       <div>
         <h1>Missing Configuration</h1>

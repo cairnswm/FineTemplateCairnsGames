@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useMemo, useState } from "react";
+import { REACT_APP_TENANT_API } from "../../env";
 
 const TenantContext = createContext(null);
 
@@ -17,7 +18,7 @@ const TenantProvider = (props) => {
       return;
     }
     setLoading("loading");
-    fetch(process.env.REACT_APP_TENANT_API + "api.php/tenant", {
+    fetch(REACT_APP_TENANT_API + "api.php/tenant", {
       headers: { "Content-Type": "application/json", APP_ID: tenant },
     })
       .then((res) => res.json())
@@ -37,7 +38,7 @@ const TenantProvider = (props) => {
           onError("Tenant: Unable to fetch Tenant details", err);
         }
       });
-    fetch(process.env.REACT_APP_TENANT_API + "getsettings.php", {
+    fetch(REACT_APP_TENANT_API + "getsettings.php", {
       headers: { "Content-Type": "application/json", APP_ID: tenant },
     })
       .then((res) => res.json())
@@ -68,7 +69,7 @@ const TenantProvider = (props) => {
       </div>
     );
   }
-  if (!process.env.REACT_APP_TENANT_API) {
+  if (!REACT_APP_TENANT_API) {
     return (
       <div>
         <h1>Missing Configuration</h1>

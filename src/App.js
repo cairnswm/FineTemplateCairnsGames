@@ -13,8 +13,10 @@ import Payment from './auth/pages/Payment';
 import ProtectedRoute from './auth/components/ProtectedRoute';
 import PublicRoute from './auth/components/PublicRoute';
 import AdminRoute from './auth/components/AdminRoute';
+import * as REACT_APP from "./env";
 
 const App = () => {
+  console.log("REACT_APP", REACT_APP);
   return (
     <>
       <Navigation />

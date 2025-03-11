@@ -7,6 +7,8 @@ import { TenantProvider } from "./auth/context/TenantContext";
 import { SettingsProvider } from "./auth/context/SettingsContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import "./env";
+
 const container = document.getElementById("root");
 const root = createRoot(container);
 
