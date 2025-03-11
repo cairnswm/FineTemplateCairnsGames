@@ -17,13 +17,9 @@ export const SettingsProvider = ({ children }) => {
   const { tenant } = useTenant();
   const { user } = useAuth();
 
-  if (!process.env.REACT_APP_SETTINGS_API) {
-    throw new Error("SettingsProvider: REACT_APP_SETTINGS_API environment variable is required");
-  }
-
   useEffect(() => {
     if (user?.id) {
-      fetch(`${process.env.REACT_APP_SETTINGS_API}/mysettings/${user.id}`,
+      fetch(`${process?.env?.REACT_APP_SETTINGS_API}/mysettings/${user.id}`,
         {
           method: "GET",
           headers: { "Content-Type": "application/json", APP_ID: tenant },
@@ -45,6 +41,18 @@ export const SettingsProvider = ({ children }) => {
     }),
     [settings]
   );
+
+  if (!process.env.REACT_APP_SETTINGS_API) {
+    return (
+      <div>
+        <h1>Missing Configuration</h1>
+        <p>
+          Set the REACT_APP_SETTINGS_API environment variable to the URL of the
+          Settings API
+        </p>
+      </div>
+    );
+  }
 
   return (
     <SettingsContext.Provider value={values}>

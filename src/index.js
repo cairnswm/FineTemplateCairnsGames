@@ -13,7 +13,7 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <TenantProvider
-      applicationId="43a32de6-e392-11ef-a1e5-1a220d8ac2c9"
+      applicationId="950ef1d9-c657-11ed-95d1-f0a654c38aa6"
       config={{}}
       onError={(message, error) => console.error(message, error)}
     >

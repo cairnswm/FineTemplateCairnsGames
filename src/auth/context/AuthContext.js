@@ -30,16 +30,9 @@ const AuthenticationProvider = (props) => {
   const [user, setUser] = useState();
   const { decodedToken } = useJwt(googleAccessToken || "");
   const [properties, setProperties] = useState([]);
-  const [roles, setRoles] = useState([]);
 
   const { tenant } = useTenant();
   const { deviceId } = useDeviceInfo();
-
-  if (!process.env.REACT_APP_AUTH_API) {
-    throw new Error(
-      "AuthProvider: REACT_APP_AUTH_API environment variable is required"
-    );
-  }
 
   useEffect(() => {
     if (token) {
@@ -610,6 +603,18 @@ const AuthenticationProvider = (props) => {
       oldIdToNewMapping
     ]
   );
+
+  if (!process.env.REACT_APP_AUTH_API) {
+    return (
+      <div>
+        <h1>Missing Configuration</h1>
+        <p>
+          Set the REACT_APP_AUTH_API environment variable to the URL of the
+          CairnsGames Auth API
+        </p>
+      </div>
+    );
+  }
 
   return (
     <GoogleOAuthProvider clientId={googleClientId}>
