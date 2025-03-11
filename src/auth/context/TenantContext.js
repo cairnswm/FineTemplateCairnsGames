@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useMemo, useState } from "react";
 import { REACT_APP_TENANT_API } from "../../env";
+import Spinner from "../components/spinner";
 
 const TenantContext = createContext(null);
 
@@ -98,7 +99,7 @@ const TenantProvider = (props) => {
   }
 
   if (loading !== "loaded") {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
 
   return (

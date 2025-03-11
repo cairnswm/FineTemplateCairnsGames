@@ -16,14 +16,14 @@ const Navigation = () => {
   };
 
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
+    <Navbar bg="dark" variant="dark">
       <Container>
         <Navbar.Brand 
           as={Link} 
           to={user ? "/home" : "/"} 
           style={{ cursor: 'pointer' }}
         >
-          Auth System
+          Template Application
         </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
