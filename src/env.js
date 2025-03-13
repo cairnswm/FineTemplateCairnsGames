@@ -1,13 +1,22 @@
-// Initialize process.env if it doesn't exist
-if (typeof process === 'undefined' || !process.env) {
-  window.process = { env: {} };
+let TENANT = "https://cairnsgames.co.za/php/tenant/";
+let AUTH = "https://cairnsgames.co.za/php/auth/";
+let SETTINGS = "https://cairnsgames.co.za/php/settings/api.php/";
+let CONTENT = "https://cairnsgames.co.za/php/content/";
+let FILES = "https://cairnsgames.co.za/files/";
+let PAYWEB3 = "http://cairnsgames.co.za/php/payweb3/";
+
+if (typeof process !== 'undefined' && process?.env) {
+  TENANT = process.env.REACT_APP_TENANT_API;
+  AUTH = process.env.REACT_APP_AUTH_API;
+  SETTINGS = process.env.REACT_APP_SETTINGS_API;
+  CONTENT = process.env.REACT_APP_CONTENT_API;
+  FILES = process.env.REACT_APP_FILES;
+  PAYWEB3 = process.env.REACT_APP_PAYWEB3_API;
 }
 
-// Define and export environment variables
-export const REACT_APP_TENANT_API = process.env.REACT_APP_TENANT_API || "https://cairnsgames.co.za/php/tenant/";
-export const REACT_APP_AUTH_API = process.env.REACT_APP_AUTH_API || "https://cairnsgames.co.za/php/auth/";
-export const REACT_APP_SETTINGS_API = process.env.REACT_APP_SETTINGS_API || "https://cairnsgames.co.za/php/settings/api.php/";
-export const REACT_APP_CONTENT_API = process.env.REACT_APP_CONTENT_API || "https://cairnsgames.co.za/php/content/";
-export const REACT_APP_FILES = process.env.REACT_APP_FILES || "https://cairnsgames.co.za/files/";
-export const REACT_APP_PAYWEB3_API = process.env.REACT_APP_PAYWEB3_API || "http://cairnsgames.co.za/php/payweb3/";
-
+export const REACT_APP_TENANT_API = TENANT;
+export const REACT_APP_AUTH_API = AUTH;
+export const REACT_APP_SETTINGS_API = SETTINGS;
+export const REACT_APP_CONTENT_API = CONTENT;
+export const REACT_APP_FILES = FILES;
+export const REACT_APP_PAYWEB3_API = PAYWEB3;

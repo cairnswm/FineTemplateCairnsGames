@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useMemo, useState } from "react";
 import { REACT_APP_TENANT_API } from "../../env";
 import Spinner from "../components/spinner";
+import { combineUrlAndPath } from "../utils/combineUrlAndPath";
 
 const TenantContext = createContext(null);
 
@@ -19,7 +20,7 @@ const TenantProvider = (props) => {
       return;
     }
     setLoading("loading");
-    fetch(REACT_APP_TENANT_API + "api.php/tenant", {
+    fetch(combineUrlAndPath(REACT_APP_TENANT_API, "api.php/tenant"), {
       headers: { "Content-Type": "application/json", APP_ID: tenant },
     })
       .then((res) => res.json())
@@ -44,7 +45,6 @@ const TenantProvider = (props) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("Tenant Params", data);
         setParams(data);
       })
       .catch((err) => {
