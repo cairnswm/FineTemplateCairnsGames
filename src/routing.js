@@ -13,7 +13,8 @@ import Payment from './auth/pages/Payment';
 import ProtectedRoute from './auth/components/ProtectedRoute';
 import PublicRoute from './auth/components/PublicRoute';
 import AdminRoute from './auth/components/AdminRoute';
-import * as REACT_APP from "./env";
+import Admin from './auth/pages/Admin';
+import ComingsoonPage from './auth/pages/ComingsoonPage';
 
 const Routing = () => {
   return (
@@ -62,11 +63,28 @@ const Routing = () => {
           }
         />
         <Route
-          path="/settings"
+          path="/comingsoon"
+          element={
+            <ProtectedRoute>
+              <ComingsoonPage />
+            </ProtectedRoute>
+          }
+        />
+        
+        <Route
+          path="/admin"
           element={
             <AdminRoute>
-              <Settings />
+              <Admin />
             </AdminRoute>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
+            <ProtectedRoute>
+              <Settings />
+            </ProtectedRoute>
           }
         />
         <Route

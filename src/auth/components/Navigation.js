@@ -1,9 +1,9 @@
-import React from 'react';
-import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import { useAdmin } from '../hooks/useAdmin';
-import { PersonCircle } from 'react-bootstrap-icons';
+import React from "react";
+import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { useAdmin } from "../hooks/useAdmin";
+import { PersonCircle } from "react-bootstrap-icons";
 
 const Navigation = () => {
   const { user, logout } = useAuth();
@@ -12,16 +12,16 @@ const Navigation = () => {
 
   const handleLogout = () => {
     logout();
-    navigate('/');
+    navigate("/");
   };
 
   return (
     <Navbar bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand 
-          as={Link} 
-          to={user ? "/home" : "/"} 
-          style={{ cursor: 'pointer' }}
+        <Navbar.Brand
+          as={Link}
+          to={user ? "/home" : "/"}
+          style={{ cursor: "pointer" }}
         >
           Template Application
         </Navbar.Brand>
@@ -29,26 +29,43 @@ const Navigation = () => {
         <Navbar.Collapse className="justify-content-end">
           <Nav>
             {user ? (
-              <NavDropdown 
+              <NavDropdown
                 title={
                   <span>
                     <PersonCircle size={20} className="me-1" />
-                    {user.firstname || 'User'}
+                    {user.firstname || "User"}
                   </span>
-                } 
+                }
                 id="user-dropdown"
                 align="end"
               >
-                <NavDropdown.Item as={Link} to="/profile">Profile</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/profile">
+                  Profile
+                </NavDropdown.Item>
                 {isAdmin && (
-                  <NavDropdown.Item as={Link} to="/settings">Settings</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/admin">
+                    Admin
+                  </NavDropdown.Item>
                 )}
-                <NavDropdown.Item as={Link} to="/properties">Properties</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/settings">
+                  Settings
+                </NavDropdown.Item>{" "}
+                <NavDropdown.Item as={Link} to="/properties">
+                  Properties
+                </NavDropdown.Item>
+                
+                <NavDropdown.Item as={Link} to="/comingsoon">
+                  Coming Soon
+                </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
+                <NavDropdown.Item onClick={handleLogout}>
+                  Logout
+                </NavDropdown.Item>
               </NavDropdown>
             ) : (
-              <Nav.Link as={Link} to="/login">Login</Nav.Link>
+              <Nav.Link as={Link} to="/login">
+                Login
+              </Nav.Link>
             )}
           </Nav>
         </Navbar.Collapse>

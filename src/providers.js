@@ -3,7 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import { TenantProvider } from "./auth/context/TenantContext";
 import { AuthenticationProvider } from "./auth/context/AuthContext";
 import { SettingsProvider } from "./auth/context/SettingsContext";
-import App from "./App";
+import App from "./app";
 
 const Providers = () => {
   return (
