@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Container, Form, Button, Card, Alert } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import PageLayout from '../components/pagelayout';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -42,7 +43,7 @@ const Login = () => {
 
   // Rest of the component remains the same
   return (
-    <Container className="mt-5">
+    <PageLayout>
       <Card style={{ maxWidth: '400px' }} className="mx-auto">
         <Card.Body>
           <h2 className="text-center mb-4">Login</h2>
@@ -86,8 +87,7 @@ const Login = () => {
             Don't have an account? <Link to="/register">Register</Link>
           </div>
         </Card.Body>
-      </Card>
-    </Container>
+      </Card></PageLayout>
   );
 };
 

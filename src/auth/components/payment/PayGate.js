@@ -1,8 +1,14 @@
 import React, { useEffect } from "react";
 import PayGateButton from "./PayGateButton";
 import { combineUrlAndPath } from "../../utils/combineUrlAndPath";
+import { REACT_APP_PAYWEB3_API } from "../../../env";
+import { useTenant } from "../../hooks/useTenant";
+import { useAuth } from "../../context/AuthContext";
 
 const PayGate = ({ onGetOrder, onPaid }) => {
+  const { tenant } = useTenant();
+  const { token } = useAuth();
+
   if (!onGetOrder) {
     throw new Error("onGetOrder is required.");
   }
@@ -41,10 +47,12 @@ const PayGate = ({ onGetOrder, onPaid }) => {
       const order = await onGetOrder();
       const orderId = order.id;
       const totalPrice = order.total_price;
-      const response = await fetch(combineUrlAndPath(process.env.REACT_APP_PAYWEB3_API,"initiate.php?order_id=" + orderId),
+      const response = await fetch(combineUrlAndPath(REACT_APP_PAYWEB3_API,"initiate.php?order_id=" + orderId),
         {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
+            "Authorization": `Bearer ${token}`,
+            "App_id": tenant,
           },
         }
       );

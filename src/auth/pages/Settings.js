@@ -1,12 +1,13 @@
 import React from 'react';
 import { Container, Card, Table } from 'react-bootstrap';
 import { useSettings } from '../context/SettingsContext';
+import PageLayout from '../components/pagelayout';
 
 const Settings = () => {
   const { settings } = useSettings();
 
   return (
-    <Container className="py-5">
+    <PageLayout>
       <Card>
         <Card.Body>
           <h2 className="mb-4">Settings</h2>
@@ -37,8 +38,7 @@ const Settings = () => {
             <p className="text-muted">No settings found.</p>
           )}
         </Card.Body>
-      </Card>
-    </Container>
+      </Card></PageLayout>
   );
 };
 

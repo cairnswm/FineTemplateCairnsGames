@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Button, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import PageLayout from '../components/pagelayout';
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ const LandingPage = () => {
   };
 
   return (
-    <Container className="py-5">
+    <PageLayout>
       <Row className="justify-content-center text-center">
         <Col md={8} lg={6}>
           <h1 className="display-4 mb-4">Welcome to Our Platform</h1>
@@ -44,8 +45,7 @@ const LandingPage = () => {
             )}
           </div>
         </Col>
-      </Row>
-    </Container>
+      </Row></PageLayout>
   );
 };
 

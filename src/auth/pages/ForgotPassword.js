@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Form, Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import PageLayout from '../components/pagelayout';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
@@ -12,7 +13,7 @@ const ForgotPassword = () => {
   };
 
   return (
-    <Container className="mt-5">
+    <PageLayout>
       <Card style={{ maxWidth: '400px' }} className="mx-auto">
         <Card.Body>
           <h2 className="text-center mb-4">Reset Password</h2>
@@ -36,8 +37,7 @@ const ForgotPassword = () => {
             Remember your password? <Link to="/login">Login</Link>
           </div>
         </Card.Body>
-      </Card>
-    </Container>
+      </Card></PageLayout>
   );
 };
 

@@ -53,6 +53,9 @@ const Navigation = () => {
                 <NavDropdown.Item as={Link} to="/properties">
                   Properties
                 </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/subscriptions">
+                  Subscriptions
+                </NavDropdown.Item>
                 
                 <NavDropdown.Item as={Link} to="/comingsoon">
                   Coming Soon

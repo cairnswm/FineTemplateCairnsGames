@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navigation from './auth/components/Navigation';
 import LandingPage from './auth/pages/LandingPage';
@@ -15,6 +15,7 @@ import PublicRoute from './auth/components/PublicRoute';
 import AdminRoute from './auth/components/AdminRoute';
 import Admin from './auth/pages/Admin';
 import ComingsoonPage from './auth/pages/ComingsoonPage';
+const SubscriptionRouting = React.lazy(() => import('./subscriptionrouting'));
 
 const Routing = () => {
   return (
@@ -94,6 +95,10 @@ const Routing = () => {
               <Properties />
             </ProtectedRoute>
           }
+        />
+        <Route
+          path="/subscriptions/*"
+          element={<Suspense><SubscriptionRouting /></Suspense>}
         />
         <Route
           path="/payment"

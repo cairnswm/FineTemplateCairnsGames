@@ -3,6 +3,7 @@ import { Container, Card, Alert } from 'react-bootstrap';
 import { useAuth } from '../context/AuthContext';
 import AvatarUpload from '../components/profile/AvatarUpload';
 import ProfileForm from '../components/profile/ProfileForm';
+import PageLayout from '../components/pagelayout';
 
 const Profile = () => {
   const { user, saveUser } = useAuth();
@@ -96,7 +97,7 @@ const Profile = () => {
   };
 
   return (
-    <Container className="py-5">
+    <PageLayout>
       <Card style={{ maxWidth: '600px' }} className="mx-auto">
         <Card.Body>
           <div className="text-center mb-4">
@@ -139,8 +140,7 @@ const Profile = () => {
             </small>
           </div>
         </Card.Body>
-      </Card>
-    </Container>
+      </Card></PageLayout>
   );
 };
 
