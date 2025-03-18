@@ -6,6 +6,7 @@ import { useAuth } from '../context/AuthContext';
 import SubscriptionsTable from '../components/subscriptions/subscriptionstable';
 import CreditsTable from '../components/subscriptions/creditstable';
 import PageLayout from '../components/pagelayout';
+import BackBar from '../components/backbar';
 
 const SubscriptionsPage = () => {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ const SubscriptionsPage = () => {
 
   return (
     <PageLayout>
+      <BackBar />
       <Card>
         <Card.Body>
           <Row className="mb-4 align-items-center">

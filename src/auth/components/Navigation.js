@@ -3,12 +3,15 @@ import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useAdmin } from "../hooks/useAdmin";
-import { PersonCircle } from "react-bootstrap-icons";
+import { PersonCircle, StarFill } from "react-bootstrap-icons";
+import { useSummary } from "../context/SummaryContext";
 
 const Navigation = () => {
   const { user, logout } = useAuth();
   const isAdmin = useAdmin();
   const navigate = useNavigate();
+
+  const { isPremium } = useSummary();
 
   const handleLogout = () => {
     logout();
@@ -26,13 +29,18 @@ const Navigation = () => {
           Template Application
         </Navbar.Brand>
         <Navbar.Toggle />
+
         <Navbar.Collapse className="justify-content-end">
           <Nav>
             {user ? (
               <NavDropdown
                 title={
                   <span>
-                    <PersonCircle size={20} className="me-1" />
+                    {isPremium ? (
+                      <StarFill size={20} className="me-1" style={{color:"gold", marginTop: "-7px"}} />
+                    ) : (
+                      <PersonCircle size={20} className="me-1" style={{marginTop: "-7px"}} />
+                    )}
                     {user.firstname || "User"}
                   </span>
                 }
@@ -56,7 +64,6 @@ const Navigation = () => {
                 <NavDropdown.Item as={Link} to="/subscriptions">
                   Subscriptions
                 </NavDropdown.Item>
-                
                 <NavDropdown.Item as={Link} to="/comingsoon">
                   Coming Soon
                 </NavDropdown.Item>

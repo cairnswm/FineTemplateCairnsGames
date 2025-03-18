@@ -3,9 +3,10 @@ let AUTH = "https://cairnsgames.co.za/php/auth/";
 let SETTINGS = "https://cairnsgames.co.za/php/settings/api.php/";
 let CONTENT = "https://cairnsgames.co.za/php/content/";
 let FILES = "https://cairnsgames.co.za/files/";
-let PAYWEB3 = "http://localhost/cairnsgames/php/payweb3/";
-// let PAYWEB3 = "http://cairnsgames.co.za/php/payweb3/";
+// let PAYWEB3 = "http://localhost/cairnsgames/php/payweb3/";
+let PAYWEB3 = "http://cairnsgames.co.za/php/payweb3/";
 let SUBSCRIPTIONS = "http://localhost/cairnsgames/php/subscriptions/";
+// let SUBSCRIPTIONS = "http://cairnsgames.co.za/php/subscriptions/";
 
 if (typeof process !== 'undefined' && process?.env) {
   TENANT = process.env.REACT_APP_TENANT_API;

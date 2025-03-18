@@ -6,7 +6,6 @@ import PageLayout from '../components/pagelayout';
 
 const HomePage = () => {
   const { user } = useAuth();
-  const navigate = useNavigate();
 
   return (
     <PageLayout>

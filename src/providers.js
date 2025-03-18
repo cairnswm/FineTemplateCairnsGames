@@ -4,6 +4,7 @@ import { TenantProvider } from "./auth/context/TenantContext";
 import { AuthenticationProvider } from "./auth/context/AuthContext";
 import { SettingsProvider } from "./auth/context/SettingsContext";
 import { SubscriptionsProvider } from "./auth/context/SubscriptionsContext";
+import { SummaryProvider } from "./auth/context/SummaryContext";
 import App from "./app";
 
 const Providers = () => {
@@ -19,9 +20,13 @@ const Providers = () => {
           onError={(message, error) => console.error(message, error)}
         >
           <SettingsProvider>
-            <BrowserRouter basename={process.env.PUBLIC_URL}>
-              <App />
-            </BrowserRouter>
+            <SubscriptionsProvider onError={(message, error) => console.error(message, error)}>
+              <SummaryProvider onError={(message, error) => console.error(message, error)}>
+                <BrowserRouter basename={process.env.PUBLIC_URL}>
+                  <App />
+                </BrowserRouter>
+              </SummaryProvider>
+            </SubscriptionsProvider>
           </SettingsProvider>
         </AuthenticationProvider>
       </TenantProvider>
