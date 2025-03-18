@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import { TenantProvider } from "./auth/context/TenantContext";
-import { AuthenticationProvider } from "./auth/context/AuthContext";
-import { SettingsProvider } from "./auth/context/SettingsContext";
-import { SubscriptionsProvider } from "./auth/context/SubscriptionsContext";
-import { SummaryProvider } from "./auth/context/SummaryContext";
-import App from "./app";
+import { TenantProvider } from "../../auth/context/TenantContext";
+import { AuthenticationProvider } from "../../auth/context/AuthContext";
+import { SettingsProvider } from "../../auth/context/SettingsContext";
+import { SubscriptionsProvider } from "../../auth/context/SubscriptionsContext";
+import { SummaryProvider } from "./SummaryContext";
+import App from "../../app";
 
 const Providers = () => {
   return (

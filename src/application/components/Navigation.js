@@ -1,8 +1,8 @@
 import React from "react";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
-import { useAdmin } from "../hooks/useAdmin";
+import { useAuth } from "../../auth/context/AuthContext";
+import { useAdmin } from "../../auth/hooks/useAdmin";
 import { PersonCircle, StarFill } from "react-bootstrap-icons";
 import { useSummary } from "../context/SummaryContext";
 

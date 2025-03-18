@@ -6,7 +6,7 @@ const Back = ({ to }) => {
     const navigate = useNavigate();
 
     return to ? (
-        <Link to={to} className="text-decoration-none m-1">
+        <Link to={to} className="text-decoration-none m-1 btn btn-link">
             <ArrowLeft /> Back
         </Link>
     ) : (

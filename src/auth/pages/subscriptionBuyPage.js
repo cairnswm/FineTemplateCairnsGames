@@ -13,7 +13,8 @@ import { useSubscriptions } from "../context/SubscriptionsContext";
 import PageLayout from "../components/pagelayout";
 import { ArrowLeft } from "react-bootstrap-icons";
 import Back from "../components/back";
-import Payment from "./Payment";
+import Payment from "./PaymentPage";
+import BackBar from "../components/backbar";
 
 const BuySubscription = () => {
   const { subscriptions, purchaseSubscription, loading } = useSubscriptions();
@@ -26,13 +27,13 @@ const BuySubscription = () => {
   const navigate = useNavigate();
 
   const handleSelectSubscription = (subscription) => {
-    setSelectedSubscriptions(prev => {
+    setSelectedSubscriptions((prev) => {
       // Check if subscription is already selected
-      const isSelected = prev.some(item => item.id === subscription.id);
-      
+      const isSelected = prev.some((item) => item.id === subscription.id);
+
       if (isSelected) {
         // Remove from selection if already selected
-        return prev.filter(item => item.id !== subscription.id);
+        return prev.filter((item) => item.id !== subscription.id);
       } else {
         // Add to selection if not already selected
         return [...prev, subscription];
@@ -47,48 +48,47 @@ const BuySubscription = () => {
 
     setError("");
     setSuccess("");
-    
+
     // Create subscription items for the payment page
-    const items = selectedSubscriptions.flatMap(subscription => [
+    const items = selectedSubscriptions.flatMap((subscription) => [
       {
         id: subscription.id,
         name: subscription.name,
         item_description: subscription.description,
         price: parseFloat(subscription.price),
         quantity: 1,
-        additional: JSON.stringify({ subscription: subscription.id })
-      }
+        additional: JSON.stringify({ subscription: subscription.id }),
+      },
     ]);
 
-    
-    console.log("Subscription to Purchase", items)
-    
+    console.log("Subscription to Purchase", items);
+
     setSubscriptionItems(items);
     setShowPayment(true);
   };
-  
+
   const handleBackToSubscriptions = () => {
     setShowPayment(false);
   };
-  
+
   const handlePaymentSuccess = async () => {
     setPurchaseLoading(true);
-    
+
     try {
       let hasError = false;
       let errorMessage = "";
-      
+
       // Purchase each subscription sequentially
       for (const subscription of selectedSubscriptions) {
         const result = await purchaseSubscription(subscription.id);
-        
+
         if (result && result.error) {
           hasError = true;
           errorMessage = result.error;
           break;
         }
       }
-      
+
       if (hasError) {
         setError(errorMessage);
         setShowPayment(false);
@@ -107,26 +107,28 @@ const BuySubscription = () => {
     }
   };
 
+  if (showPayment) {
+    return (
+      <PageLayout>
+        <Button
+          variant="outline-secondary"
+          className="mb-3"
+          onClick={handleBackToSubscriptions}
+        >
+          Back to Subscription Selection
+        </Button>
+        <Payment
+          subscriptionItems={subscriptionItems}
+          onPaid={handlePaymentSuccess}
+        />
+      </PageLayout>
+    );
+  }
+
   return (
     <PageLayout>
-      {showPayment ? (
-        <>
-          <Button 
-            variant="outline-secondary" 
-            className="mb-3"
-            onClick={handleBackToSubscriptions}
-          >
-            Back to Subscription Selection
-          </Button>
-          <Payment 
-            subscriptionItems={subscriptionItems} 
-            onPaid={handlePaymentSuccess}
-          />
-        </>
-      ) : (
-        <>
-          <Back to="/subscriptions" />
-          <Card>
+      <BackBar to="/subscriptions" />
+      <Card>
         <Card.Body>
           <h2 className="mb-4">Available Subscriptions</h2>
 
@@ -155,7 +157,9 @@ const BuySubscription = () => {
                   <Col key={subscription.id}>
                     <Card
                       className={`h-100 ${
-                        selectedSubscriptions.some(item => item.id === subscription.id)
+                        selectedSubscriptions.some(
+                          (item) => item.id === subscription.id
+                        )
                           ? "border-primary"
                           : ""
                       }`}
@@ -183,7 +187,9 @@ const BuySubscription = () => {
                       <Card.Footer className="bg-transparent">
                         <Button
                           variant={
-                            selectedSubscriptions.some(item => item.id === subscription.id)
+                            selectedSubscriptions.some(
+                              (item) => item.id === subscription.id
+                            )
                               ? "primary"
                               : "outline-primary"
                           }
@@ -193,7 +199,9 @@ const BuySubscription = () => {
                             handleSelectSubscription(subscription);
                           }}
                         >
-                          {selectedSubscriptions.some(item => item.id === subscription.id)
+                          {selectedSubscriptions.some(
+                            (item) => item.id === subscription.id
+                          )
                             ? "Selected"
                             : "Select"}
                         </Button>
@@ -212,7 +220,9 @@ const BuySubscription = () => {
                 </Button>
                 <Button
                   variant="success"
-                  disabled={selectedSubscriptions.length === 0 || purchaseLoading}
+                  disabled={
+                    selectedSubscriptions.length === 0 || purchaseLoading
+                  }
                   onClick={handlePurchase}
                 >
                   {purchaseLoading ? (
@@ -228,7 +238,11 @@ const BuySubscription = () => {
                       Processing...
                     </>
                   ) : (
-                    `Purchase ${selectedSubscriptions.length > 1 ? 'Subscriptions' : 'Subscription'}`
+                    `Purchase ${
+                      selectedSubscriptions.length > 1
+                        ? "Subscriptions"
+                        : "Subscription"
+                    }`
                   )}
                 </Button>
               </div>
@@ -239,9 +253,7 @@ const BuySubscription = () => {
             </Alert>
           )}
         </Card.Body>
-          </Card>
-        </>
-      )}
+      </Card>
     </PageLayout>
   );
 };

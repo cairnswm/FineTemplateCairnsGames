@@ -1,9 +1,9 @@
 import React from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-import ProtectedRoute from "./auth/components/ProtectedRoute";
-import Subscriptions from "./auth/pages/subscriptions";
-import BuySubscription from "./auth/pages/buysubscription";
-import { SubscriptionsProvider } from "./auth/context/SubscriptionsContext";
+import ProtectedRoute from "../components/ProtectedRoute";
+import Subscriptions from "../pages/subscriptionsPage";
+import BuySubscription from "../pages/subscriptionBuyPage";
+import { SubscriptionsProvider } from "../context/SubscriptionsContext";
 
 const SubscriptionRouting = () => {
   const location = useLocation();

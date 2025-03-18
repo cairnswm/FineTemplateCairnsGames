@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Container, Card, Table, Button, Form, Alert } from 'react-bootstrap';
 import { useAuth } from '../context/AuthContext';
 import PageLayout from '../components/pagelayout';
+import BackBar from '../components/backbar';
 
 const Properties = () => {
   const { properties, saveProperties } = useAuth();
@@ -48,6 +49,7 @@ const Properties = () => {
 
   return (
     <PageLayout>
+      <BackBar />
       <Card>
         <Card.Body>
           <h2 className="mb-4">Properties</h2>

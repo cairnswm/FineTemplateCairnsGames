@@ -1,8 +1,8 @@
 import React from 'react';
 import { Container, Button, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import PageLayout from '../components/pagelayout';
+import { useAuth } from '../../auth/context/AuthContext';
+import PageLayout from '../../auth/components/pagelayout';
 
 const LandingPage = () => {
   const navigate = useNavigate();

@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import AvatarUpload from '../components/profile/AvatarUpload';
 import ProfileForm from '../components/profile/ProfileForm';
 import PageLayout from '../components/pagelayout';
+import BackBar from '../components/backbar';
 
 const Profile = () => {
   const { user, saveUser } = useAuth();
@@ -98,6 +99,7 @@ const Profile = () => {
 
   return (
     <PageLayout>
+      <BackBar />
       <Card style={{ maxWidth: '600px' }} className="mx-auto">
         <Card.Body>
           <div className="text-center mb-4">

@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-const Providers = React.lazy(() => import("./providers"));
+const Providers = React.lazy(() => import("./application/context/providers"));
 
 const Main = () => {
   return (

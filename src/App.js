@@ -1,7 +1,7 @@
 import React, { lazy, Suspense } from "react";
-const Routing = lazy(() => import("./routing"));
+const Routing = lazy(() => import("./application/routing/routing"));
 
-import "./app.css";
+import "./app.scss";
 
 const App = () => {
   return (

@@ -2,12 +2,14 @@ import React from 'react';
 import { Container, Card, Table } from 'react-bootstrap';
 import { useSettings } from '../context/SettingsContext';
 import PageLayout from '../components/pagelayout';
+import BackBar from '../components/backbar';
 
 const Settings = () => {
   const { settings } = useSettings();
 
   return (
     <PageLayout>
+      <BackBar />
       <Card>
         <Card.Body>
           <h2 className="mb-4">Settings</h2>

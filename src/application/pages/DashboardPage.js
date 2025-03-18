@@ -1,14 +1,16 @@
 import React from 'react';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import PageLayout from '../components/pagelayout';
+import { useAuth } from '../../auth/context/AuthContext';
+import PageLayout from '../../auth/components/pagelayout';
+import PageMenu from '../components/pagemenu';
+import MobileMenu from '../components/mobilemenu';
 
-const HomePage = () => {
+const DashboardPage = () => {
   const { user } = useAuth();
-
   return (
-    <PageLayout>
+    <PageLayout >
+      <PageMenu />
       <Row className="mb-4">
         <Col>
           <h1>Welcome, {user?.name || 'User'}!</h1>
@@ -53,4 +55,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default DashboardPage;

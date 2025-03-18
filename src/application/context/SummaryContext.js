@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
-import { useTenant } from "../hooks/useTenant";
-import { useAuth } from "./AuthContext";
-import { combineUrlAndPath } from "../utils/combineUrlAndPath";
+import { useTenant } from "../../auth/hooks/useTenant";
+import { useAuth } from "../../auth/context/AuthContext";
+import { combineUrlAndPath } from "../../auth/utils/combineUrlAndPath";
 import { REACT_APP_SUBSCRIPTIONS_API } from "../../env";
 
 const SummaryContext = createContext(null);
@@ -36,7 +36,6 @@ const SummaryProvider = ({ children, onError }) => {
       );
       const data = await response.json();
       const active = data.find((item) => item.hasActiveSubscription);
-      console.log("ACTIVE SUBSCRIPTION", active);
       setActiveSubscription(active || null);
     } catch (err) {
       if (onError) {
