@@ -1,71 +1,75 @@
-import React, { useState } from 'react';
-import { Container, Form, Button, Card, Alert } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import PageLayout from '../components/pagelayout';
+import React, { useState, useEffect } from "react";
+import { Container, Form, Button, Card, Alert } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import PageLayout from "../components/pagelayout";
 
 const Register = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
   const { register } = useAuth();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    console.log("Error Set", error);
+  }, [error]);
+
   const handleSubmit = async (e) => {
+    console.log("Handle Submit");
     e.preventDefault();
-    setError(''); // Clear any previous errors
+    setError(""); 
 
     if (password !== confirmPassword) {
-      setError('Passwords do not match');
+      setError("Passwords do not match");
       return;
     }
 
     try {
-      console.log('Attempting registration with:', { email });
+      console.log("Attempting registration with:", { email });
       const result = await register(email, password, confirmPassword);
-      console.log('Registration response:', result);
+      console.log("Registration response:", result);
 
-      if (result?.errors) {
-        console.log('Error type:', typeof result.errors);
-        console.log('Error value:', result.errors);
+      console.log("Do we have errors?", !!result?.errors);
+      if (!!result?.errors) {
+        console.log("Error type:", typeof result.errors);
+        console.log("Error value:", result.errors);
 
         if (Array.isArray(result.errors)) {
-          // Extract message from error object in array
-          const errorMessages = result.errors
-            .map(err => err.message)
-            .filter(Boolean)
-            .join(', ');
-          setError(errorMessages || 'Registration failed');
-        } else if (typeof result.errors === 'string') {
+          console.log("Errors array:", result.errors);
+          console.log("error", result.errors[0]);
+          setError(result.errors[0].message);
+        } else if (typeof result.errors === "string") {
           setError(result.errors);
         } else {
-          setError('Registration failed. Please try again.');
+          setError("Registration failed. Please try again.");
         }
       } else if (!result?.token) {
-        setError('Registration failed. Please try again.');
+        setError("Registration failed. Please try again.");
       } else {
-        navigate('/profile');
+        console.log("Registration successful. Navigating to /profile");
+        navigate("/profile");
       }
     } catch (err) {
-      console.error('Registration error:', err);
-      setError('An error occurred during registration. Please try again.');
+      console.error("Registration error:", err);
+      setError("An error occurred during registration. Please try again.");
     }
   };
 
   return (
     <PageLayout>
-      <Card style={{ maxWidth: '400px' }} className="mx-auto">
+      <Card style={{ maxWidth: "400px" }} className="mx-auto">
         <Card.Body>
           <h2 className="text-center mb-4">Register</h2>
 
           {error && (
-            <Alert variant="danger" onClose={() => setError('')} dismissible>
+            <Alert variant="danger" onClose={() => setError("")} dismissible>
               {error}
             </Alert>
           )}
 
-          <Form onSubmit={handleSubmit}>
+          <Form>
             <Form.Group className="mb-3">
               <Form.Label>Email address</Form.Label>
               <Form.Control
@@ -96,7 +100,7 @@ const Register = () => {
               />
             </Form.Group>
 
-            <Button variant="primary" type="submit" className="w-100">
+            <Button variant="primary" className="w-100" onClick={(e)=>handleSubmit(e)}>
               Register
             </Button>
           </Form>
@@ -105,7 +109,8 @@ const Register = () => {
             Already have an account? <Link to="/login">Login</Link>
           </div>
         </Card.Body>
-      </Card></PageLayout>
+      </Card>
+    </PageLayout>
   );
 };
 
