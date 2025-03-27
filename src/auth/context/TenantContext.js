@@ -48,8 +48,10 @@ const TenantProvider = (props) => {
       .then((data) => {
         setParams(data);
         const accessElfApikey = data.find((s) => s.name === "accessElfApiKey");
-        if (accessElfApikey) {
+        if (accessElfApikey && accessElfApikey.value !== "") {
           accessElf.setApiKey(accessElfApikey.value);
+        } else {          
+          console.warn("No ApiKey found for AccessElf");
         }
       })
       .catch((err) => {
