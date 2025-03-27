@@ -7,12 +7,15 @@ import SubscriptionsTable from '../components/subscriptions/subscriptionstable';
 import CreditsTable from '../components/subscriptions/creditstable';
 import PageLayout from '../components/pagelayout';
 import BackBar from '../components/backbar';
+import { accessElf } from '../utils/accessElf';
 
 const SubscriptionsPage = () => {
   const navigate = useNavigate();
   const subscriptionsContext = useSubscriptions();
   const { userSubscriptions = [], userCredits = [], loading = false } = subscriptionsContext || {};
   const { properties = [] } = useAuth();
+
+  accessElf.track("Subscriptions")
 
   const handleBuyClick = () => {
     navigate('/subscriptions/buy');

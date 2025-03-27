@@ -5,9 +5,13 @@ import { useAuth } from '../../auth/context/AuthContext';
 import PageLayout from '../../auth/components/pagelayout';
 import PageMenu from '../components/pagemenu';
 import MobileMenu from '../components/mobilemenu';
+import { accessElf } from '../../auth/utils/accessElf';
 
 const DashboardPage = () => {
   const { user } = useAuth();
+
+  accessElf.track("Dashboard");
+  
   return (
     <PageLayout >
       <PageMenu />

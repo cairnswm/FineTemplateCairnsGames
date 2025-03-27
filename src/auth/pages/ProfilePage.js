@@ -5,6 +5,7 @@ import AvatarUpload from '../components/profile/AvatarUpload';
 import ProfileForm from '../components/profile/ProfileForm';
 import PageLayout from '../components/pagelayout';
 import BackBar from '../components/backbar';
+import { accessElf } from '../utils/accessElf';
 
 const Profile = () => {
   const { user, saveUser } = useAuth();
@@ -13,6 +14,8 @@ const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+
+  accessElf.track("Profile");
 
   useEffect(() => {
     if (user) {

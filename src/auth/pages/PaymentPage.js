@@ -5,6 +5,7 @@ import PageLayout from '../components/pagelayout';
 import { useTenant } from '../hooks/useTenant';
 import { useAuth } from '../context/AuthContext';
 import { useSubscriptions } from '../context/SubscriptionsContext';
+import { accessElf } from '../utils/accessElf';
 
 const Payment = ({ subscriptionItems = [], onPaid }) => {
   const [amount, setAmount] = useState('0.00');
@@ -13,6 +14,8 @@ const Payment = ({ subscriptionItems = [], onPaid }) => {
   const { tenant } = useTenant();
   const { token } = useAuth();
   const { createOrder } = useSubscriptions();
+
+  accessElf.track("Payment");
 
   useEffect(() => {
     if (subscriptionItems.length > 0) {

@@ -2,6 +2,7 @@ import React, { createContext, useEffect, useMemo, useState } from "react";
 import { REACT_APP_TENANT_API } from "../../env";
 import Spinner from "../components/spinner";
 import { combineUrlAndPath } from "../utils/combineUrlAndPath";
+import {accessElf} from "../utils/accessElf";
 
 const TenantContext = createContext(null);
 
@@ -46,6 +47,10 @@ const TenantProvider = (props) => {
       .then((res) => res.json())
       .then((data) => {
         setParams(data);
+        const accessElfApikey = data.find((s) => s.name === "accessElfApiKey");
+        if (accessElfApikey) {
+          accessElf.setApiKey(accessElfApikey.value);
+        }
       })
       .catch((err) => {
         if (onError) {

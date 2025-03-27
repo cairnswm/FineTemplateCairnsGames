@@ -205,6 +205,9 @@ const AuthenticationProvider = (props) => {
       .then((data) => {
         if (typeof data === "string") {
           data = JSON.parse(data);
+        }        
+        if (data.errors) {
+          return data;
         }
         settoken(data.token);
         const userDetails = {
